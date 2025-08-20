@@ -11,10 +11,14 @@
       placeholder="Enter email"
       formControlName="email"
     />
-    <small id="emailHelp" class="form-text text-muted"
-      >We'll never share your email with anyone else.</small
-    >
+    <div class="text-danger" *ngIf="email?.errors && email?.invalid && email?.touched">
+        <div *ngIf="email?.errors?.['required']">Email is required</div>
+        <div *ngIf="email?.errors?.['email']">Email is not valid</div>
+        <div *ngIf="email?.errors?.['minlength']">Email must be at least 5 characters long</div>
+    </div>
   </div>
+  <!-- ? means optional chaining. It will return undefined if the property errors does not exists -->
+  <pre>{{ email?.errors | json }}</pre>
   <div class="form-group">
     <label for="password">Password</label>
     <input
@@ -24,12 +28,18 @@
       placeholder="Password"
       fomrControlName="password"
     />
-  </div>
+
+  <div class="text-danger" *ngIf="password?.errors && password?.invalid && password?.touched">
+        <div *ngIf="password?.errors?.['required']">password is required</div>
+        <div *ngIf="password?.errors?.['password']">password is not valid</div>
+        <div *ngIf="password?.errors?.['minlength']">password must be at least 5 characters long</div>
+    </div>
+      <pre>{{ password?.errors | json }}</pre>
   <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="subscribe" formControlName="subscribe" />
     <label class="form-check-label" for="subscribe">subscribe for our newsletter</label>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid" (click)="onSubmit()">Submit</button>
+</div>
 </form>
-
 <pre>{{loginForm.value | json}}</pre>
