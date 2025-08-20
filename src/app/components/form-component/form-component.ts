@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { avoidWord } from '../../customValidation';
 
 @Component({
   selector: 'app-form-component',
@@ -14,7 +15,7 @@ loginForm!: FormGroup;
 constructor(private formBuilderInstance: FormBuilder){
   // create a form group with two form controls: email, password, subscribe
  this.loginForm = this.formBuilderInstance.group({
-    email: ['', [Validators.required, Validators.email, Validators.minLength(5)]],
+    email: ['', [Validators.required, Validators.email, Validators.minLength(5), avoidWord]],
     password: ['', [Validators.required, Validators.minLength(5)]],
     subscribe: false,
   })

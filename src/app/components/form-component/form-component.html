@@ -15,6 +15,7 @@
         <div *ngIf="email?.errors?.['required']">Email is required</div>
         <div *ngIf="email?.errors?.['email']">Email is not valid</div>
         <div *ngIf="email?.errors?.['minlength']">Email must be at least 5 characters long</div>
+        <div *ngIf="email?.errors?.['avoidWord']">Please don't try to hack</div>
     </div>
   </div>
   <!-- ? means optional chaining. It will return undefined if the property errors does not exists -->
